@@ -1,5 +1,7 @@
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +19,21 @@ namespace MyStoreWinApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+
+            string username = GetConnectionString("Account:UserName");
+            string pass = GetConnectionString("Account:PassWord");
+
+            Application.Run(new frmLogin(username,pass));
+
+            
+        }
+        public static string GetConnectionString(String location)
+        {
+            IConfiguration config = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsetting.json")
+               .Build();
+            String a = config[location]; return a;
         }
     }
 }

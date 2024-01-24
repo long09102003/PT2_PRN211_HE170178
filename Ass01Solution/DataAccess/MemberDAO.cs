@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-    public class MemberDAO
+    public class MemberDAO:IComparer<MemberObject>
     {
         private static List<MemberObject> MemberList = new List<MemberObject>()
         {
@@ -37,7 +37,7 @@ namespace DataAccess
             }
         }
 
-        public List<MemberObject> GetMemberObjects => MemberList;
+        public List<MemberObject> GetMemberObjectsList => MemberList;
 
         public MemberObject GetMemberByID(int memberID) 
         {
@@ -87,6 +87,25 @@ namespace DataAccess
             {
                 throw new Exception("Member does not already exists");
             }
+        }
+
+        public void SortByID()
+        {
+            MemberList.Sort(Compare);
+        }
+
+        public void SortByName()
+        {
+            MemberList.Sort(Compare1);
+        }
+
+        public int Compare(MemberObject x, MemberObject y)
+        {
+            return x.MemberID.CompareTo(y.MemberID);
+        }
+        public int Compare1(MemberObject x, MemberObject y)
+        {
+            return x.MemberName.CompareTo(y.MemberName);
         }
     }
 }
