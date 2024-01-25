@@ -41,21 +41,34 @@ namespace DataAccess
 
         public MemberObject GetMemberByID(int memberID) 
         {
-            MemberObject member = MemberList.SingleOrDefault(pro => pro.MemberID == memberID); 
+            MemberObject member = null;
+            member = MemberList.SingleOrDefault(pro => pro.MemberID == memberID); 
             return member;
         }
 
         // ADD new member
+        //public void Add(MemberObject member)
+        //{
+        //    MemberObject pro = GetMemberByID(member.MemberID);
+        //    if (pro == null)
+        //    {
+        //        MemberList.Add(member);
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Menber ID is already exists (add new)");
+        //    }
+        //}
+
         public void AddNew(MemberObject member)
         {
-            MemberObject pro = GetMemberByID(member.MemberID);
-            if (pro == null)
+            if (GetMemberByID(member.MemberID) == null)
             {
                 MemberList.Add(member);
             }
             else
             {
-                throw new Exception("Menber ID is already exists");
+                throw new Exception("Add faild: have that id in List ");
             }
         }
 
@@ -71,7 +84,7 @@ namespace DataAccess
             }
             else
             {
-                throw new Exception("Member does not already exists.");
+                throw new Exception("Member does not already exists.(update)");
             }
         }
 
@@ -106,6 +119,18 @@ namespace DataAccess
         public int Compare1(MemberObject x, MemberObject y)
         {
             return x.MemberName.CompareTo(y.MemberName);
+        }
+
+        public IEnumerable<MemberObject> Search(string key)
+        {
+            key = key.ToLower(); 
+            return MemberList.Where(member =>
+                member.MemberID.ToString().Contains(key) ||
+                member.MemberName.ToLower().Contains(key) ||
+                member.Email.ToLower().Contains(key) ||
+                member.City.ToLower().Contains(key) ||
+                member.Country.ToLower().Contains(key)
+            );
         }
     }
 }

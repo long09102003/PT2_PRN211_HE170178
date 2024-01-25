@@ -30,11 +30,11 @@ namespace MyStoreWinApp
 
         private void btnCancel_Click(object sender, EventArgs e) => Close();
 
-        //private void frmLogin_Load(object sender, EventArgs e)
-        //{
-        //    txtEmail.Text = username;
-        //    txtPass.Text = password;
-        //}
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            txtEmail.Text = username;
+            txtPass.Text = password;
+        }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -42,6 +42,10 @@ namespace MyStoreWinApp
             if(username == txtEmail.Text && password == txtPass.Text)
             {
                 MessageBox.Show("LoginSuccessfull");
+                frmMemberManagement frmMemberManagement = new frmMemberManagement();
+                this.Hide();
+                frmMemberManagement.ShowDialog();
+                this.Show();
             }
             else
             {

@@ -14,8 +14,9 @@ namespace DataAccess.Repository
         void InsertMember(MemberObject member);
         void DeleteMember(int id);
         void UpdateMember(MemberObject member);
-        public void SortMemberByID();
-        public void SortMemberByName();
-        public void SearchByID(string id);
+        void SortMemberByID();
+        void SortMemberByName();
+
+        IEnumerable<MemberObject> Search(string key);
     }
 }

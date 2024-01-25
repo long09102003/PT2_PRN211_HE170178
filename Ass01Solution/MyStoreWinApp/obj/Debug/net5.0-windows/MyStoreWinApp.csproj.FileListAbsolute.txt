@@ -32,3 +32,4 @@ E:\ki5\PRN211\PT2_PRN211_HE170178\Ass01Solution\MyStoreWinApp\bin\Debug\net5.0-w
 E:\ki5\PRN211\PT2_PRN211_HE170178\Ass01Solution\MyStoreWinApp\bin\Debug\net5.0-windows\DataAccess.dll
 E:\ki5\PRN211\PT2_PRN211_HE170178\Ass01Solution\MyStoreWinApp\bin\Debug\net5.0-windows\BusinessObject.pdb
 E:\ki5\PRN211\PT2_PRN211_HE170178\Ass01Solution\MyStoreWinApp\bin\Debug\net5.0-windows\DataAccess.pdb
+E:\ki5\PRN211\PT2_PRN211_HE170178\Ass01Solution\MyStoreWinApp\obj\Debug\net5.0-windows\MyStoreWinApp.frmMemberDetail.resources

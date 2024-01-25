@@ -15,19 +15,10 @@ namespace DataAccess.Repository
         public void InsertMember(MemberObject member) => MemberDAO.Instance.AddNew(member);
         public void DeleteMember(int memberId) => MemberDAO.Instance.Remove(memberId);
         public void UpdateMember(MemberObject member) => MemberDAO.Instance.Update(member);
-        public void SortMemberByID()
-        {
-            throw new NotImplementedException();
-        }
+        public void SortMemberByID() => MemberDAO.Instance.SortByID();
 
-        public void SortMemberByName()
-        {
-            throw new NotImplementedException();
-        }
+        public void SortMemberByName() => MemberDAO.Instance.SortByName();
 
-        public void SearchByID(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<MemberObject> Search(string key) => MemberDAO.Instance.Search(key);
     }
 }

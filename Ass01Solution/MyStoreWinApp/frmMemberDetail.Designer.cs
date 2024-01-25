@@ -142,6 +142,7 @@
             // 
             // btnSave
             // 
+            btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             btnSave.Location = new System.Drawing.Point(178, 492);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(94, 29);
@@ -152,6 +153,7 @@
             // 
             // btnCancel
             // 
+            btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             btnCancel.Location = new System.Drawing.Point(350, 494);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(94, 29);

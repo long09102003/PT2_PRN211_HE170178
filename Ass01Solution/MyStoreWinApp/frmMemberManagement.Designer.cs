@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -35,22 +36,27 @@
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
-            comboBox1 = new System.Windows.Forms.ComboBox();
-            comboBox2 = new System.Windows.Forms.ComboBox();
-            button7 = new System.Windows.Forms.Button();
-            button8 = new System.Windows.Forms.Button();
+            cboCity = new System.Windows.Forms.ComboBox();
+            cboCountry = new System.Windows.Forms.ComboBox();
+            btnLoad = new System.Windows.Forms.Button();
+            btnNew = new System.Windows.Forms.Button();
             btnDelete = new System.Windows.Forms.Button();
-            button10 = new System.Windows.Forms.Button();
+            btnSearch = new System.Windows.Forms.Button();
             dgvMemberList = new System.Windows.Forms.DataGridView();
             txtMemberID = new System.Windows.Forms.TextBox();
             txtMemberName = new System.Windows.Forms.TextBox();
             txtEmail = new System.Windows.Forms.TextBox();
             txtPassWord = new System.Windows.Forms.TextBox();
             txtCity = new System.Windows.Forms.TextBox();
-            textBox6 = new System.Windows.Forms.TextBox();
+            txtKey = new System.Windows.Forms.TextBox();
             label8 = new System.Windows.Forms.Label();
             txtCountry = new System.Windows.Forms.TextBox();
+            btnClose = new System.Windows.Forms.Button();
+            label9 = new System.Windows.Forms.Label();
+            bindingSource1 = new System.Windows.Forms.BindingSource(components);
+            cbSort = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvMemberList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -116,62 +122,68 @@
             label7.TabIndex = 6;
             label7.Text = "filter:";
             // 
-            // comboBox1
+            // cboCity
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(763, 134);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(151, 28);
-            comboBox1.TabIndex = 13;
+            cboCity.FormattingEnabled = true;
+            cboCity.Location = new System.Drawing.Point(763, 134);
+            cboCity.Name = "cboCity";
+            cboCity.Size = new System.Drawing.Size(151, 28);
+            cboCity.TabIndex = 13;
+            cboCity.SelectedIndexChanged += cboCity_SelectedIndexChanged;
             // 
-            // comboBox2
+            // cboCountry
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new System.Drawing.Point(939, 134);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new System.Drawing.Size(151, 28);
-            comboBox2.TabIndex = 14;
+            cboCountry.FormattingEnabled = true;
+            cboCountry.Location = new System.Drawing.Point(939, 134);
+            cboCountry.Name = "cboCountry";
+            cboCountry.Size = new System.Drawing.Size(151, 28);
+            cboCountry.TabIndex = 14;
+            cboCountry.SelectedIndexChanged += cboCountry_SelectedIndexChanged;
             // 
-            // button7
+            // btnLoad
             // 
-            button7.Location = new System.Drawing.Point(266, 280);
-            button7.Name = "button7";
-            button7.Size = new System.Drawing.Size(94, 29);
-            button7.TabIndex = 15;
-            button7.Text = "Load";
-            button7.UseVisualStyleBackColor = true;
+            btnLoad.Location = new System.Drawing.Point(319, 270);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new System.Drawing.Size(94, 29);
+            btnLoad.TabIndex = 15;
+            btnLoad.Text = "Load";
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
             // 
-            // button8
+            // btnNew
             // 
-            button8.Location = new System.Drawing.Point(511, 280);
-            button8.Name = "button8";
-            button8.Size = new System.Drawing.Size(94, 29);
-            button8.TabIndex = 16;
-            button8.Text = "New";
-            button8.UseVisualStyleBackColor = true;
+            btnNew.Location = new System.Drawing.Point(526, 270);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new System.Drawing.Size(94, 29);
+            btnNew.TabIndex = 16;
+            btnNew.Text = "New";
+            btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += btnNew_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new System.Drawing.Point(738, 280);
+            btnDelete.Location = new System.Drawing.Point(735, 270);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new System.Drawing.Size(94, 29);
             btnDelete.TabIndex = 17;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
-            // button10
+            // btnSearch
             // 
-            button10.Location = new System.Drawing.Point(996, 44);
-            button10.Name = "button10";
-            button10.Size = new System.Drawing.Size(94, 29);
-            button10.TabIndex = 18;
-            button10.Text = "Submit";
-            button10.UseVisualStyleBackColor = true;
+            btnSearch.Location = new System.Drawing.Point(996, 44);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(94, 29);
+            btnSearch.TabIndex = 18;
+            btnSearch.Text = "Submit";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // dgvMemberList
             // 
             dgvMemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMemberList.Location = new System.Drawing.Point(63, 325);
+            dgvMemberList.Location = new System.Drawing.Point(73, 305);
             dgvMemberList.Name = "dgvMemberList";
             dgvMemberList.RowHeadersWidth = 51;
             dgvMemberList.RowTemplate.Height = 29;
@@ -214,12 +226,12 @@
             txtCity.Size = new System.Drawing.Size(208, 27);
             txtCity.TabIndex = 24;
             // 
-            // textBox6
+            // txtKey
             // 
-            textBox6.Location = new System.Drawing.Point(763, 44);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new System.Drawing.Size(208, 27);
-            textBox6.TabIndex = 25;
+            txtKey.Location = new System.Drawing.Point(763, 44);
+            txtKey.Name = "txtKey";
+            txtKey.Size = new System.Drawing.Size(208, 27);
+            txtKey.TabIndex = 25;
             // 
             // label8
             // 
@@ -237,26 +249,58 @@
             txtCountry.Size = new System.Drawing.Size(208, 27);
             txtCountry.TabIndex = 27;
             // 
+            // btnClose
+            // 
+            btnClose.Location = new System.Drawing.Point(526, 597);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(94, 29);
+            btnClose.TabIndex = 28;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(691, 222);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(39, 20);
+            label9.TabIndex = 29;
+            label9.Text = "Sort:";
+            // 
+            // cbSort
+            // 
+            cbSort.FormattingEnabled = true;
+            cbSort.Items.AddRange(new object[] { "Sort By ID", "Sort By Name" });
+            cbSort.Location = new System.Drawing.Point(763, 214);
+            cbSort.Name = "cbSort";
+            cbSort.Size = new System.Drawing.Size(151, 28);
+            cbSort.TabIndex = 30;
+            cbSort.SelectedIndexChanged += cbSort_SelectedIndexChanged;
+            // 
             // frmMemberManagement
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1146, 637);
+            Controls.Add(cbSort);
+            Controls.Add(label9);
+            Controls.Add(btnClose);
             Controls.Add(txtCountry);
             Controls.Add(label8);
-            Controls.Add(textBox6);
+            Controls.Add(txtKey);
             Controls.Add(txtCity);
             Controls.Add(txtPassWord);
             Controls.Add(txtEmail);
             Controls.Add(txtMemberName);
             Controls.Add(txtMemberID);
             Controls.Add(dgvMemberList);
-            Controls.Add(button10);
+            Controls.Add(btnSearch);
             Controls.Add(btnDelete);
-            Controls.Add(button8);
-            Controls.Add(button7);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(btnNew);
+            Controls.Add(btnLoad);
+            Controls.Add(cboCountry);
+            Controls.Add(cboCity);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -268,6 +312,7 @@
             Text = "frmMemberManagement";
             Load += frmMemberManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvMemberList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -281,20 +326,24 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.ComboBox cboCity;
+        private System.Windows.Forms.ComboBox cboCountry;
+        private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.DataGridView dgvMemberList;
         private System.Windows.Forms.TextBox txtMemberID;
         private System.Windows.Forms.TextBox txtMemberName;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPassWord;
         private System.Windows.Forms.TextBox txtCity;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtKey;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtCountry;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ComboBox cbSort;
     }
 }
