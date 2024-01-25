@@ -18,5 +18,13 @@ namespace DataAccess.Repository
         void SortMemberByName();
 
         IEnumerable<MemberObject> Search(string key);
+
+        List<string> GetDistinctCities();
+
+        List<string> GetDistinctCountry();
+        IEnumerable<MemberObject> GetMembersByCity(string city);
+
+        IEnumerable<MemberObject> GetMembersByCountry(string country);
+
     }
 }

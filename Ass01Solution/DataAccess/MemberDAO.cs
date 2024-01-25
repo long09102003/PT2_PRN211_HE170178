@@ -132,5 +132,25 @@ namespace DataAccess
                 member.Country.ToLower().Contains(key)
             );
         }
+
+        public List<string> GetCities()
+        {
+            HashSet<string> citySet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var member in MemberList)
+            {
+                citySet.Add(member.City);
+            }
+            return citySet.ToList();
+        }
+
+        public List<string> GetCountry()
+        {
+            HashSet<string> countrySet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var member in MemberList)
+            {
+                countrySet.Add(member.Country);
+            }
+            return countrySet.ToList();
+        }
     }
 }

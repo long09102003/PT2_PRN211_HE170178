@@ -57,6 +57,8 @@ namespace MyStoreWinApp
             return memberObject;
         }
 
+
+
         public void LoadMemberList()
         {
             var members = memberList.ToList();
@@ -103,7 +105,9 @@ namespace MyStoreWinApp
             btnDelete.Enabled = false;
             //Register this event to open the frmMemberDetail from that performs updating
             dgvMemberList.CellDoubleClick += dgvMemberList_CellDoubleClick;
-
+            //LoadData();
+            LoadCityList();
+            LoadCountryList();
         }
 
         private void dgvMemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -118,16 +122,66 @@ namespace MyStoreWinApp
             if (frmMemberDetail.ShowDialog() == DialogResult.OK)
             {
                 LoadMemberList();
+                LoadCityList();
+                LoadCountryList();
                 //Set focus car update
                 //source.Position = source.Count - 1;
             }
         }
 
+        private void LoadCityList()
+        {
+            try
+            {
+                // Lấy danh sách thành phố từ repository
+                var cities = menberRepository.GetDistinctCities();
+
+                // Clear existing items in the ComboBox
+                cboCity.Items.Clear();
+
+                // Add cities to the ComboBox
+                cboCity.Items.AddRange(cities.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load City List");
+            }
+        }
+
+        private void LoadCountryList()
+        {
+            try
+            {
+                // Lấy danh sách thành phố từ repository
+                var cities = menberRepository.GetDistinctCountry();
+
+                // Clear existing items in the ComboBox
+                cboCountry.Items.Clear();
+
+                // Add cities to the ComboBox
+                cboCountry.Items.AddRange(cities.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load City List");
+            }
+        }
+
+        private void LoadData()
+        {
+            // Lấy danh sách thành viên từ repository
+            memberList = menberRepository.GetMembers();
+
+            // Hiển thị danh sách thành viên ban đầu
+            LoadMemberList();
+        }
+
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            //LoadFilterOptions();
-            memberList = menberRepository.GetMembers();
-            LoadMemberList();
+            
+            //memberList = menberRepository.GetMembers();
+            //LoadMemberList();
+            LoadData();
         }//end btnLoad_click
 
         private void btnClose_Click(object sender, EventArgs e) => Close();
@@ -143,6 +197,8 @@ namespace MyStoreWinApp
             if (frmMemberDetail.ShowDialog() == DialogResult.OK)
             {
                 LoadMemberList();
+                LoadCountryList();
+                LoadCityList();
                 //set focus car inserted
                 source.Position = source.Count - 1;
             }
@@ -198,45 +254,54 @@ namespace MyStoreWinApp
 
         }
 
-        //private void cbxCity_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    cbxCountry.Text = "none ";
-        //    if (memberList != null)
-        //    {
-        //        string key = cbxCity.Text;
-        //        if (key.Equals("none"))
-        //        {
-        //            sortFuctionText();
-        //        }
-        //        else
-        //        {
-        //            var sortMembers = memberRepository1.getListMember().Where(x => x.City.Equals(key)).ToList();
-        //            memberList = sortMembers;
-        //            LoadMemberList();
-        //        }
-        //    }
-        //}
 
-        //private void LoadCityList()
-        //{
-        //    cityList = memberRepository1.getListMember().Select(x => x.City).Distinct().ToList();
-        //    cityList.Insert(0, "none");
-        //    cbxCity.DataSource = null;
-        //    cbxCity.DataSource = cityList;
-        //}
+
+      
+       
 
         private void cboCity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string selectedCity = cboCity.SelectedItem?.ToString();
-            //FilterMembersByCity(selectedCity);
+            try
+            {
+                string selectedCity = cboCity.SelectedItem as string;
+
+                if (!string.IsNullOrEmpty(selectedCity))
+                {
+                    // Lọc thành viên theo thành phố đã chọn
+                    memberList = menberRepository.GetMembersByCity(selectedCity);
+
+                    // Load danh sách thành viên đã lọc
+                    LoadMemberList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "City Selection Changed");
+            }
         }
 
         private void cboCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string selectedcountry = cbocountry.selecteditem?.tostring();
-            //filtermembersbycountry(selectedcountry);
+            try
+            {
+                string selectedCity = cboCountry.SelectedItem as string;
+
+                if (!string.IsNullOrEmpty(selectedCity))
+                {
+                    // Lọc thành viên theo thành phố đã chọn
+                    memberList = menberRepository.GetMembersByCountry(selectedCity);
+
+                    // Load danh sách thành viên đã lọc
+                    LoadMemberList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Country Selection Changed");
+            }
         }
 
        
+
     }
 }

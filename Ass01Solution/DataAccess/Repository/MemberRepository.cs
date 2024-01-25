@@ -20,5 +20,21 @@ namespace DataAccess.Repository
         public void SortMemberByName() => MemberDAO.Instance.SortByName();
 
         public IEnumerable<MemberObject> Search(string key) => MemberDAO.Instance.Search(key);
+
+        public List<string> GetDistinctCities() => MemberDAO.Instance.GetCities();
+
+        public List<string> GetDistinctCountry() => MemberDAO.Instance.GetCountry();
+        public IEnumerable<MemberObject> GetMembersByCity(string city)
+        {
+            return MemberDAO.Instance.GetMemberObjectsList
+                .Where(member => member.City.Equals(city, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<MemberObject> GetMembersByCountry(string country)
+        {
+            return MemberDAO.Instance.GetMemberObjectsList
+                .Where(member => member.Country.Equals(country, StringComparison.OrdinalIgnoreCase));
+        }
+
     }
 }

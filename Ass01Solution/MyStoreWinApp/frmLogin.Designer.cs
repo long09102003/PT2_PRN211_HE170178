@@ -67,6 +67,7 @@
             txtPass.Name = "txtPass";
             txtPass.Size = new System.Drawing.Size(235, 27);
             txtPass.TabIndex = 3;
+            txtPass.UseSystemPasswordChar = true;
             // 
             // btnLogin
             // 
